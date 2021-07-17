@@ -1,0 +1,16 @@
+SELECT COUNT(*) FROM film
+WHERE length > (
+SELECT (AVG(length)) FROM film);
+
+
+SELECT COUNT(*) FROM film
+WHERE rental_rate = (SELECT (MAX(rental_rate)) FROM film);
+
+SELECT title, replacement_cost, rental_rate FROM film
+WHERE (rental_rate = (SELECT MIN(rental_rate) FROM film)) AND (replacement_cost = (SELECT MIN(replacement_cost) FROM film));
+
+SELECT first_name, last_name, SUM(amount) from customer
+INNER JOIN payment ON customer.customer_id = payment.customer_id
+GROUP BY customer.first_name, customer.last_name
+ORDER BY SUM(amount) DESC;
+
